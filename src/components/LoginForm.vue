@@ -2,23 +2,30 @@
   <form @submit.prevent="handleSubmit">
 	  <input type="email" required placeholder="your email" v-model="email">
 	  <input type="password" required placeholder="password" v-model="password">
+    <div class="error">{{ error }}</div>
 	  <button>Sign in</button>
   </form>
 </template>
 
 <script>
+import useLogin from '@/composables/useLogin'
 import { ref } from 'vue'
 export default {
 setup() {
 	// refs
 	const email = ref('')
-	const password = ref('')
+  const password = ref('')
 
-	const handleSubmit = () => {
-		console.log( email.value, password.value )
+  const { error, login } = useLogin()
+
+	const handleSubmit = async () => {
+    await login(email.value, password.value)
+    if(!error.value) {
+      console.log('user logged in')
+    }
 	}
 
-	return { email, password, handleSubmit }
+	return { email, password, handleSubmit, error }
 }
 }
 </script>
