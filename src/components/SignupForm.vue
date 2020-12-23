@@ -1,4 +1,5 @@
 <template>
+<h3>Sign up Here</h3>
   <form @submit.prevent="handleSubmit">
 	  <input type="text" required placeholder="display name" v-model="displayName">
 	  <input type="email" required placeholder="your email" v-model="email">
